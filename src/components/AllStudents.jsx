@@ -3,10 +3,8 @@ import { StudentContext } from "../contexts/StudentContext"
 
 const AllStudents = () => {
     const {
-        students,
-        handleEditMode,
-        deleteStudent,
-        handleStudentStatus,
+        studentStates,
+        dispatch,
     } = useContext(StudentContext)
     return (
         <>
@@ -21,14 +19,14 @@ const AllStudents = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {students.map(student => (
+                            {studentStates.students.map(student => (
                                 <tr key={student.id}>
                                     <td>{student.name}</td>
                                     <td className="flex gap-1">
-                                        <button onClick={() => handleEditMode(student)} className="btn btn-info btn-xs">Edit</button>
-                                        <button onClick={() => deleteStudent(student.id)} className="btn btn-error btn-xs">Delete</button>
-                                        <button onClick={() => handleStudentStatus(student.id, true)} className="btn btn-success btn-xs">Make Present</button>
-                                        <button onClick={() => handleStudentStatus(student.id, false)} className="btn btn-secondary btn-xs">Make Absent</button>
+                                        <button onClick={() => dispatch({type:"enableEditMode", payload:{student}})} className="btn btn-info btn-xs">Edit</button>
+                                        <button onClick={() => dispatch({type:"deleteStudent", payload:{id:student.id}})} className="btn btn-error btn-xs">Delete</button>
+                                        <button onClick={() => dispatch({type:"changeStudentStatus", payload:{id:student.id,isPresent:true}})} className="btn btn-success btn-xs">Make Present</button>
+                                        <button onClick={() => dispatch({type:"changeStudentStatus", payload:{id:student.id,isPresent:false}})}className="btn btn-secondary btn-xs">Make Absent</button>
                                     </td>
                                 </tr>
                             ))}

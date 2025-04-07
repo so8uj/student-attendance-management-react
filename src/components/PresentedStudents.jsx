@@ -4,7 +4,7 @@ import { StudentContext } from "../contexts/StudentContext"
 const PresentedStudents = () => {
     const {
         presentStudents,
-        handleStudentStatus,
+        dispatch,
     } = useContext(StudentContext)
     return (
         <>
@@ -25,8 +25,8 @@ const PresentedStudents = () => {
                                 <tr key={presentStudent.id}>
                                     <td>{presentStudent.name}</td>
                                     <td className="flex gap-1">
-                                        <button onClick={() => handleStudentStatus(presentStudent.id, false)} className="btn btn-secondary btn-xs">Make Absent</button>
-                                        <button onClick={() => handleStudentStatus(presentStudent.id, undefined)} className="btn btn-error btn-xs">Accedentally Cliked</button>
+                                        <button onClick={() => dispatch({type:"changeStudentStatus", payload:{id:presentStudent.id,isPresent:false}})} className="btn btn-secondary btn-xs">Make Absent</button>
+                                        <button onClick={() => dispatch({type:"changeStudentStatus", payload:{id:presentStudent.id,isPresent:undefined}})} className="btn btn-error btn-xs">Accedentally Cliked</button>
                                     </td>
                                 </tr>
                             ))}

@@ -4,10 +4,9 @@ import { StudentContext } from "../contexts/StudentContext"
 const StudentForm = () => {
 
     const {
-        handleForm,
-        studetnName,
+        studentStates,
         handleInput,
-        editMode
+        handleForm,
     } = useContext(StudentContext)
 
     return (
@@ -17,10 +16,10 @@ const StudentForm = () => {
                 <form onSubmit={handleForm}>
                     <div className="join">
                         <input className="input join-item rounded-l-full" placeholder="Student Name"
-                            value={studetnName}
+                            value={studentStates.studetnName}
                             onChange={handleInput}
                         />
-                        <button className="btn btn-primary join-item rounded-r-full">{editMode ? "Update" : "Add"} Student</button>
+                        <button className="btn btn-primary join-item rounded-r-full">{studentStates.editMode ? "Update" : "Add"} Student</button>
                     </div>
                 </form>
             </div>
